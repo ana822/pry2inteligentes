@@ -101,7 +101,7 @@ public class clsTablero {
                     }
                 }
 //abajo               
-                if ((i + 1) < 8 && tablero[i][j].equals(ficha) && tablero[i + 1][j].equals(fichaContraria(ficha))) {
+                if ((i + 1) < 7 && tablero[i][j].equals(ficha) && tablero[i + 1][j].equals(fichaContraria(ficha))) {
                     //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 1);
                     if (p.getX() != -100 && p.getY() != -100) {
@@ -121,7 +121,7 @@ public class clsTablero {
                     }
                 }
 //derecha
-                if ((j + 1) < 8 && tablero[i][j].equals(ficha) && tablero[i][j + 1].equals(fichaContraria(ficha))) {
+                if ((j + 1) < 7 && tablero[i][j].equals(ficha) && tablero[i][j + 1].equals(fichaContraria(ficha))) {
                     //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 3);
                     if (p.getX() != -100 && p.getY() != -100) {
@@ -141,7 +141,7 @@ public class clsTablero {
                     }
                 }
 //abajo-izquierda
-                if ((i + 1) < 8 && (j - 1) > 0 && tablero[i][j].equals(ficha) && tablero[i + 1][j - 1].equals(fichaContraria(ficha))) {
+                if ((i + 1) <7 && (j - 1) > 0 && tablero[i][j].equals(ficha) && tablero[i + 1][j - 1].equals(fichaContraria(ficha))) {
                     //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 5);
                     if (p.getX() != -100 && p.getY() != -100) {
@@ -151,7 +151,7 @@ public class clsTablero {
                     }
                 }
 //arriba-derecha
-                if ((i - 1) > 0 && (j + 1) < 8 && tablero[i][j].equals(ficha) && tablero[i - 1][j + 1].equals(fichaContraria(ficha))) {
+                if ((i - 1) > 0 && (j + 1) <7 && tablero[i][j].equals(ficha) && tablero[i - 1][j + 1].equals(fichaContraria(ficha))) {
                     //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 6);
                     if (p.getX() != -100 && p.getY() != -100) {
@@ -161,7 +161,7 @@ public class clsTablero {
                     }
                 }
 //abajo-derecha  
-                if ((i + 1) < 8 && (j + 1) < 8 && tablero[i][j].equals(ficha) && tablero[i + 1][j + 1].equals(fichaContraria(ficha))) {
+                if ((i + 1) <7 && (j + 1) <7 && tablero[i][j].equals(ficha) && tablero[i + 1][j + 1].equals(fichaContraria(ficha))) {
                     //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 7);
                     if (p.getX() != -100 && p.getY() != -100) {
@@ -189,7 +189,7 @@ public class clsTablero {
 //arriba
         if (mov == 0) {
 
-            for (int i = (int) punto.getX() - 1; i >= 0; i--) {
+            for (int i = (int) punto.getX() - 1; i > 0; i--) {
 
                 if (tablero[i][(int) punto.getY()].equals(fichaContraria(ficha))) {
 
@@ -204,7 +204,7 @@ public class clsTablero {
 //abajo        
         if (mov == 1) {
 
-            for (int i = (int) punto.getX() + 1; i < 8; i++) {
+            for (int i = (int) punto.getX() + 1; i < 7; i++) {
 
                 if (tablero[i][(int) punto.getY()].equals(fichaContraria(ficha))) {
 
@@ -218,7 +218,7 @@ public class clsTablero {
         }
 //izquierda
         if (mov == 2) {
-            for (int i = (int) punto.getY() - 1; i >= 0; i--) {
+            for (int i = (int) punto.getY() - 1; i > 0; i--) {
                 if (tablero[(int) punto.getX()][i].equals(fichaContraria(ficha))) {
                     if (tablero[(int) punto.getX()][i - 1].equals("vacia")) {
                         p.setLocation((int) punto.getX(), i - 1);
@@ -230,7 +230,7 @@ public class clsTablero {
         }
 //derecha
         if (mov == 3) {
-            for (int i = (int) punto.getY() + 1; i < 8; i++) {
+            for (int i = (int) punto.getY() + 1; i < 7; i++) {
                 if (tablero[(int) punto.getX()][i].equals(fichaContraria(ficha))) {
 
                     if (tablero[(int) punto.getX()][i + 1].equals("vacia")) {
@@ -244,7 +244,7 @@ public class clsTablero {
 //arriba-izquierda
         if (mov == 4) {
 
-            for (int i = (int) punto.getX() - 1, j = (int) punto.getY() - 1; i >= 0 && j >= 0; i--, j--) {
+            for (int i = (int) punto.getX() - 1, j = (int) punto.getY() - 1; i > 0 && j > 0; i--, j--) {
 
                 if (tablero[i][j].equals(fichaContraria(ficha))) {
 
@@ -259,7 +259,7 @@ public class clsTablero {
 //abajo-izquierda
         if (mov == 5) {
 
-            for (int i = (int) punto.getX() + 1, j = (int) punto.getY() - 1; i < 8 && j >= 0; i++, j--) {
+            for (int i = (int) punto.getX() + 1, j = (int) punto.getY() - 1; i < 7 && j > 0; i++, j--) {
 
                 if (tablero[i][j].equals(fichaContraria(ficha))) {
 
@@ -274,7 +274,7 @@ public class clsTablero {
 //arriba-derecha
         if (mov == 6) {
 
-            for (int i = (int) punto.getX() - 1, j = (int) punto.getY() + 1; i >= 0 && j < 8; i--, j++) {
+            for (int i = (int) punto.getX() - 1, j = (int) punto.getY() + 1; i > 0 && j <7; i--, j++) {
 
                 if (tablero[i][j].equals(fichaContraria(ficha))) {
 
@@ -289,7 +289,7 @@ public class clsTablero {
 //abajo-derecha     
         if (mov == 7) {
 
-            for (int i = (int) punto.getX() + 1, j = (int) punto.getY() + 1; i < 8 && j < 8; i++, j++) {
+            for (int i = (int) punto.getX() + 1, j = (int) punto.getY() + 1; i < 7 && j < 7; i++, j++) {
 
                 if (tablero[i][j].equals(fichaContraria(ficha))) {
 
