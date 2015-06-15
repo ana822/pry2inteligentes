@@ -122,7 +122,7 @@ String [][] jugadas= new String[8][8];
                 if (tablero.puedoMover(new Point(i, j))) {
                     quitarPosibles();
                     fichas[i][j].setIcon(imgnegra);
-                    actualizartablero();
+                   
                     tablero.ponerFicha(new Point(i, j), "negra");
                     //quitarPosibles();
                     
@@ -131,9 +131,9 @@ String [][] jugadas= new String[8][8];
                     //cantMov = jugador.CantidadFichas(tablero.getTablero());
                     
                     turno = 2;
-//                    if (tablero.tableroLLeno()) {
-//                        ganador(tablero.getTablero());
-//                    }
+                    if (tablero.tableroLLeno()) {
+                        ganador(tablero.getTablero());
+                    }
                     System.out.println("estasss sooooon "+ tablero.getTablero()[i][j]);
                    try {
                         //tablero.mostrar();
@@ -145,7 +145,7 @@ String [][] jugadas= new String[8][8];
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                     actualizartablero();
+                     
                 }
                  
                     
@@ -153,7 +153,7 @@ String [][] jugadas= new String[8][8];
                 if (tablero.puedoMover(new Point(i, j))) {
                     quitarPosibles();
                     fichas[i][j].setIcon(imgblanca);
-                     actualizartablero();
+                     
                     tablero.ponerFicha(new Point(i, j), "blanca");
                     //quitarPosibles();
                     pintarEntrePuntos(tablero.validarMedios(new Point(i, j), "blanca"));
@@ -162,7 +162,14 @@ String [][] jugadas= new String[8][8];
                     //cantMov = jugador.CantidadFichas(tablero.getTablero());
                     turno = 1;
                     //tablero.mostrar();
-                    try {
+                    
+                     
+                }
+//                 if(tablero.getMov().isEmpty()){
+//                     System.out.println("La maquina no tiene jugada ");
+//                    turno=2;
+//                }
+                try {
                         //tablero.mostrar();
                         jugadas=jugador.EnviarJuagada(tablero.getTablero());
                         tablero.setTablero(jugadas);
@@ -171,17 +178,11 @@ String [][] jugadas= new String[8][8];
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                     actualizartablero();
-                }
-//                 if(tablero.getMov().isEmpty()){
-//                     System.out.println("La maquina no tiene jugada ");
-//                    turno=2;
-//                }
                  
             }
-//            if (tablero.tableroLLeno()) {
-//                        ganador(tablero.getTablero());
-//                    }
+            if (tablero.tableroLLeno()) {
+                        ganador(tablero.getTablero());
+                    }
               
         }
     }
@@ -224,28 +225,17 @@ String [][] jugadas= new String[8][8];
         }
     }
 
-//    public void ganador(String[][] tab) {
-//        int[] mov;
-//
-//        mov = jugador.CantidadFichas(tab);
-//        if (mov[0] > mov[1]) {
-//            JOptionPane.showMessageDialog(this, "Jugador 1 Gana");
-//        } else if (mov[0] < mov[1]) {
-//            JOptionPane.showMessageDialog(this, "Game Over");
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Empate!!");
-//        }
-//    }
-      public void actualizartablero() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+    public void ganador(String[][] tab) {
+        int[] mov;
 
-                if (tablero.getTablero()[i][j].equals("negra")) {
-                    fichas[i][j].setIcon(imgnegra);
-                }
-
-            }
-
+        mov = jugador.CantidadFichas(tab);
+        if (mov[0] > mov[1]) {
+            JOptionPane.showMessageDialog(this, "Jugador 1 Gana");
+        } else if (mov[0] < mov[1]) {
+            JOptionPane.showMessageDialog(this, "Game Over");
+        } else {
+            JOptionPane.showMessageDialog(this, "Empate!!");
         }
     }
+    
 }
