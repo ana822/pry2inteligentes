@@ -10,7 +10,10 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -33,10 +36,10 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
     ImageIcon imgmedionegra = new ImageIcon("src/imagenes/ficha_medionegra.png");
     ImageIcon imgmedioblanca = new ImageIcon("src/imagenes/ficha_medioblanca.png");
     clsTablero tablero;
-    clsJugador jugador = new clsJugador();
+    clsJugador jugador;
     int[] cantMov;
     int turno;
-
+String [][] jugadas= new String[8][8];
     public pnlTablero() {
 
         initComponents();
@@ -73,6 +76,12 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
         //fichas [5][3].setIcon(imgblanca);
         // fichas [5][2].setIcon(imgnegra);
         tablero.llenarPosiblesMovimientosInicial();
+        try {
+            jugador=new clsJugador();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "SERVIDOR NO DISPONIBLE");
+            //Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -111,42 +120,69 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
             if (turno == 1) {
                 
                 if (tablero.puedoMover(new Point(i, j))) {
-                    fichas[i][j].setIcon(imgnegra);
-                    tablero.ponerFicha(new Point(i, j), "negra");
                     quitarPosibles();
+                    fichas[i][j].setIcon(imgnegra);
+                    actualizartablero();
+                    tablero.ponerFicha(new Point(i, j), "negra");
+                    //quitarPosibles();
                     
                     pintarEntrePuntos(tablero.validarMedios(new Point(i, j), "negra"));
                     pintarPosibles(tablero.validarMovimientos("blanca"));
-                    cantMov = jugador.CantidadFichas(tablero.getTablero());
+                    //cantMov = jugador.CantidadFichas(tablero.getTablero());
                     
                     turno = 2;
-                    if (tablero.tableroLLeno()) {
-                        ganador(tablero.getTablero());
+//                    if (tablero.tableroLLeno()) {
+//                        ganador(tablero.getTablero());
+//                    }
+                    System.out.println("estasss sooooon "+ tablero.getTablero()[i][j]);
+                   try {
+                        //tablero.mostrar();
+                       
+                        jugadas=jugador.EnviarJuagada(tablero.getTablero());
+                        tablero.setTablero(jugadas);
+                    } catch (IOException ex) {
+                        Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    //tablero.mostrar();
-                } else{
-                    turno = 2;
+                     actualizartablero();
                 }
+                 
                     
             } else if (turno == 2) {
                 if (tablero.puedoMover(new Point(i, j))) {
-                    fichas[i][j].setIcon(imgblanca);
-                    tablero.ponerFicha(new Point(i, j), "blanca");
                     quitarPosibles();
+                    fichas[i][j].setIcon(imgblanca);
+                     actualizartablero();
+                    tablero.ponerFicha(new Point(i, j), "blanca");
+                    //quitarPosibles();
                     pintarEntrePuntos(tablero.validarMedios(new Point(i, j), "blanca"));
                     pintarPosibles(tablero.validarMovimientos("negra"));
                     
-                    cantMov = jugador.CantidadFichas(tablero.getTablero());
+                    //cantMov = jugador.CantidadFichas(tablero.getTablero());
                     turno = 1;
                     //tablero.mostrar();
-                }
-                else{
-                    turno = 1;
-                }
-            }
-            if (tablero.tableroLLeno()) {
-                        ganador(tablero.getTablero());
+                    try {
+                        //tablero.mostrar();
+                        jugadas=jugador.EnviarJuagada(tablero.getTablero());
+                        tablero.setTablero(jugadas);
+                    } catch (IOException ex) {
+                        Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                     actualizartablero();
+                }
+//                 if(tablero.getMov().isEmpty()){
+//                     System.out.println("La maquina no tiene jugada ");
+//                    turno=2;
+//                }
+                 
+            }
+//            if (tablero.tableroLLeno()) {
+//                        ganador(tablero.getTablero());
+//                    }
+              
         }
     }
 
@@ -188,16 +224,28 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
         }
     }
 
-    public void ganador(String[][] tab) {
-        int[] mov;
+//    public void ganador(String[][] tab) {
+//        int[] mov;
+//
+//        mov = jugador.CantidadFichas(tab);
+//        if (mov[0] > mov[1]) {
+//            JOptionPane.showMessageDialog(this, "Jugador 1 Gana");
+//        } else if (mov[0] < mov[1]) {
+//            JOptionPane.showMessageDialog(this, "Game Over");
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Empate!!");
+//        }
+//    }
+      public void actualizartablero() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
 
-        mov = jugador.CantidadFichas(tab);
-        if (mov[0] > mov[1]) {
-            JOptionPane.showMessageDialog(this, "Jugador 1 Gana");
-        } else if (mov[0] < mov[1]) {
-            JOptionPane.showMessageDialog(this, "Game Over");
-        } else {
-            JOptionPane.showMessageDialog(this, "Empate!!");
+                if (tablero.getTablero()[i][j].equals("negra")) {
+                    fichas[i][j].setIcon(imgnegra);
+                }
+
+            }
+
         }
     }
 }

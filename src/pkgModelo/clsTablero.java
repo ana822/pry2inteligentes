@@ -6,18 +6,28 @@
 package pkgModelo;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
  *
  * @author Ana
  */
-public class clsTablero {
+public class clsTablero implements Serializable{
 
     private String[][] tablero = new String[8][8];
     private clsFicha ficha = new clsFicha();
     private LinkedList<Point> mov;
     LinkedList<Point> puntosPintar;
+
+    public LinkedList<Point> getMov() {
+        return mov;
+    }
+
+    public void setMov(LinkedList<Point> mov) {
+        this.mov = mov;
+    }
+    
 
     public void llenarMatriz() {
         for (int i = 0; i < tablero.length; i++) {
@@ -588,6 +598,10 @@ public class clsTablero {
 
     public String[][] getTablero() {
         return tablero;
+    }
+
+    public void setTablero(String[][] tablero) {
+        this.tablero = tablero;
     }
 
 }

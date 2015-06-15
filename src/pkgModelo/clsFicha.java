@@ -5,11 +5,13 @@
  */
 package pkgModelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ana
  */
-public class clsFicha {
+public class clsFicha implements Serializable{
 
     private String vacia="vacia";
     private String blanca="blanca";
