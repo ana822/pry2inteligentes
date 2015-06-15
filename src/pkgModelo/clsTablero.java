@@ -13,7 +13,7 @@ import java.util.LinkedList;
  *
  * @author Ana
  */
-public class clsTablero implements Serializable{
+public class clsTablero implements Serializable {
 
     private String[][] tablero = new String[8][8];
     private clsFicha ficha = new clsFicha();
@@ -27,7 +27,6 @@ public class clsTablero implements Serializable{
     public void setMov(LinkedList<Point> mov) {
         this.mov = mov;
     }
-    
 
     public void llenarMatriz() {
         for (int i = 0; i < tablero.length; i++) {
@@ -74,12 +73,14 @@ public class clsTablero implements Serializable{
         mov.add(new Point(2, 3));
         mov.add(new Point(4, 5));
     }
-    
-/**
- * Revisa si el punto seleccionado se encuentra en la lista de posibles movimientos
- * @param pos la posición que de la casilla seleccionada
- * @return Retorna true o false según sea el caso
- */
+
+    /**
+     * Revisa si el punto seleccionado se encuentra en la lista de posibles
+     * movimientos
+     *
+     * @param pos la posición que de la casilla seleccionada
+     * @return Retorna true o false según sea el caso
+     */
     public boolean puedoMover(Point pos) {
         for (int i = 0; i < mov.size(); i++) {
             if (pos.getX() == mov.get(i).getX() && pos.getY() == mov.get(i).getY()) {
@@ -89,11 +90,12 @@ public class clsTablero implements Serializable{
         return false;
     }
 
-/**
- * Se valida los posibles movimientos que el jugador puede hacer
- * @param ficha la ficha a la cual se le evaluará los posibles movimientos 
- * @return 
- */
+    /**
+     * Se valida los posibles movimientos que el jugador puede hacer
+     *
+     * @param ficha la ficha a la cual se le evaluará los posibles movimientos
+     * @return
+     */
     public LinkedList<Point> validarMovimientos(String ficha) {
         mov = new LinkedList();
         Point p;
@@ -151,7 +153,7 @@ public class clsTablero implements Serializable{
                     }
                 }
 //abajo-izquierda
-                if ((i + 1) <7 && (j - 1) > 0 && tablero[i][j].equals(ficha) && tablero[i + 1][j - 1].equals(fichaContraria(ficha))) {
+                if ((i + 1) < 7 && (j - 1) > 0 && tablero[i][j].equals(ficha) && tablero[i + 1][j - 1].equals(fichaContraria(ficha))) {
                     //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 5);
                     if (p.getX() != -100 && p.getY() != -100) {
@@ -161,7 +163,7 @@ public class clsTablero implements Serializable{
                     }
                 }
 //arriba-derecha
-                if ((i - 1) > 0 && (j + 1) <7 && tablero[i][j].equals(ficha) && tablero[i - 1][j + 1].equals(fichaContraria(ficha))) {
+                if ((i - 1) > 0 && (j + 1) < 7 && tablero[i][j].equals(ficha) && tablero[i - 1][j + 1].equals(fichaContraria(ficha))) {
                     //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 6);
                     if (p.getX() != -100 && p.getY() != -100) {
@@ -171,7 +173,7 @@ public class clsTablero implements Serializable{
                     }
                 }
 //abajo-derecha  
-                if ((i + 1) <7 && (j + 1) <7 && tablero[i][j].equals(ficha) && tablero[i + 1][j + 1].equals(fichaContraria(ficha))) {
+                if ((i + 1) < 7 && (j + 1) < 7 && tablero[i][j].equals(ficha) && tablero[i + 1][j + 1].equals(fichaContraria(ficha))) {
                     //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 7);
                     if (p.getX() != -100 && p.getY() != -100) {
@@ -185,14 +187,17 @@ public class clsTablero implements Serializable{
 
         return mov;
     }
-    
-/**
- * Evalúa cada uno de los posibles movimientos y se verifica la casilla vacia para agregarla a la lista de posibles movimientos
- * @param punto a partir del cual se hará la búsqueda de las casillas del color contrario
- * @param ficha para saber a que color corresponde esa casilla
- * @param mov 
- * @return 
- */
+
+    /**
+     * Evalúa cada uno de los posibles movimientos y se verifica la casilla
+     * vacia para agregarla a la lista de posibles movimientos
+     *
+     * @param punto a partir del cual se hará la búsqueda de las casillas del
+     * color contrario
+     * @param ficha para saber a que color corresponde esa casilla
+     * @param mov
+     * @return
+     */
     public Point movReversi(Point punto, String ficha, int mov) {
         Point p = new Point(-100, -100);
 
@@ -284,7 +289,7 @@ public class clsTablero implements Serializable{
 //arriba-derecha
         if (mov == 6) {
 
-            for (int i = (int) punto.getX() - 1, j = (int) punto.getY() + 1; i > 0 && j <7; i--, j++) {
+            for (int i = (int) punto.getX() - 1, j = (int) punto.getY() + 1; i > 0 && j < 7; i--, j++) {
 
                 if (tablero[i][j].equals(fichaContraria(ficha))) {
 
@@ -313,12 +318,13 @@ public class clsTablero implements Serializable{
         }
         return p;
     }
-    
-/**
- * Me permite determinar el color contrario de una ficha
- * @param ficha
- * @return la ficha del color contrario
- */
+
+    /**
+     * Me permite determinar el color contrario de una ficha
+     *
+     * @param ficha
+     * @return la ficha del color contrario
+     */
     public String fichaContraria(String ficha) {
         if (ficha.equals("negra")) {
             ficha = "blanca";
@@ -329,11 +335,12 @@ public class clsTablero implements Serializable{
     }
 
     /**
-     * 
+     *
      * @param pinicial la posición del movimiento realizado
      * @param ficha Color de la ficha
      * @param mov
-     * @return el punto hasta el cual se debe evaluar para poder pintar las fichas del color contrario
+     * @return el punto hasta el cual se debe evaluar para poder pintar las
+     * fichas del color contrario
      */
     public Point ultimaFicha(Point pinicial, String ficha, int mov) {
         Point pfinal = new Point();
@@ -432,8 +439,10 @@ public class clsTablero implements Serializable{
 
     /**
      * Se evalúan los puntos que serán cambiados de color por el color contrario
+     *
      * @param posIni
-     * @return la lista de los puntos que hay entre punto inicial y un punto final.
+     * @return la lista de los puntos que hay entre punto inicial y un punto
+     * final.
      */
     public LinkedList<Point> validarMedios(Point posIni, String ficha) {
         puntosPintar = new LinkedList<>();
@@ -564,8 +573,9 @@ public class clsTablero implements Serializable{
 
     /**
      * Me determina si una casilla está vacía o no
-     * @param f 
-     * @return 
+     *
+     * @param f
+     * @return
      */
     public boolean esVacio(String f) {
 
@@ -574,10 +584,12 @@ public class clsTablero implements Serializable{
         }
         return false;
     }
-/**
- * me verifica si el tablero tiene todas las fichas, que no quede vacíos 
- * @return si está o no lleno el tablero
- */
+
+    /**
+     * me verifica si el tablero tiene todas las fichas, que no quede vacíos
+     *
+     * @return si está o no lleno el tablero
+     */
     public boolean tableroLLeno() {
         int cont = 0;
 
@@ -604,4 +616,78 @@ public class clsTablero implements Serializable{
         this.tablero = tablero;
     }
 
+    /// Chekea el tablero, determina si hay ganador, Return -1, 1 ó 0
+    public int GetWinner() {
+        int winner = 0;
+        winner = terminado(getTablero());
+        if (winner != 0) {
+            if (winner == 2) {
+                winner = -1; // pc
+            } else if (winner == 1) {
+                winner = 1; // humano                     
+            }
+            return winner;
+        }
+        return winner;
+    }
+
+    /// chekea si todas las posiciones estan ocupadas        
+    /// retorna true o false
+    public boolean IsTie() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (!getTablero()[i][j].equals("vacia")) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean GameEnded() {
+        return (GetWinner() != 0 || IsTie());
+    }
+
+    //devolver quien es el ganador; 0=empate;1=Jugador;2=Maquina
+    public int terminado(String[][] tablero) {
+        int cantFichasN = 0;
+        if (tableroLLeno()) {
+            for (int i = 0; i < tablero.length; i++) {
+                for (int j = 0; j < tablero.length; j++) {
+                    if (tablero[i][j].equals("negra")) {//negra=juagador
+                        cantFichasN += 1;
+                    }
+                }
+            }
+            if (cantFichasN > 32) {
+                return 1;
+            } else if (cantFichasN < 32) {
+                return 2;
+            }
+        }
+        return 0;
+    }
+
+    public clsTablero(String[][] tablero1) {
+        tablero = new String[8][8];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                tablero[i][j] = tablero1[i][j];
+            }
+        }
+    }
+
+    public Object Clone() {
+        clsTablero board = new clsTablero(tablero);
+//        for (int i = 0; i < board.getTablero().length; i++) {
+//            for (int j = 0; j < board.getTablero().length; j++) {
+//                System.out.print(board.getTablero()[i][j]);
+//            }
+//            System.out.println("");
+//        }
+        return board;
+    }
+
+    public clsTablero() {
+    }
 }

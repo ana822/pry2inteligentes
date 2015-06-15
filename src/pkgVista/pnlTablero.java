@@ -39,7 +39,8 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
     clsJugador jugador;
     int[] cantMov;
     int turno;
-String [][] jugadas= new String[8][8];
+    String[][] jugadas = new String[8][8];
+
     public pnlTablero() {
 
         initComponents();
@@ -72,12 +73,12 @@ String [][] jugadas= new String[8][8];
         fichas[5][4].setIcon(imgmedionegra);
         fichas[2][3].setIcon(imgmedionegra);
         fichas[4][5].setIcon(imgmedionegra);
-        
+
         //fichas [5][3].setIcon(imgblanca);
         // fichas [5][2].setIcon(imgnegra);
         tablero.llenarPosiblesMovimientosInicial();
         try {
-            jugador=new clsJugador();
+            jugador = new clsJugador();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "SERVIDOR NO DISPONIBLE");
             //Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,72 +119,70 @@ String [][] jugadas= new String[8][8];
         String ficha = "i" + i + j;
         if (ficha.equals(e.getActionCommand())) {
             if (turno == 1) {
-                
+
                 if (tablero.puedoMover(new Point(i, j))) {
                     quitarPosibles();
                     fichas[i][j].setIcon(imgnegra);
-                   
+
                     tablero.ponerFicha(new Point(i, j), "negra");
                     //quitarPosibles();
-                    
+
                     pintarEntrePuntos(tablero.validarMedios(new Point(i, j), "negra"));
                     pintarPosibles(tablero.validarMovimientos("blanca"));
                     //cantMov = jugador.CantidadFichas(tablero.getTablero());
-                    
+
                     turno = 2;
                     if (tablero.tableroLLeno()) {
                         ganador(tablero.getTablero());
                     }
-                    System.out.println("estasss sooooon "+ tablero.getTablero()[i][j]);
-                   try {
+                    System.out.println("estasss sooooon " + tablero.getTablero()[i][j]);
+                    try {
                         //tablero.mostrar();
-                       
-                        jugadas=jugador.EnviarJuagada(tablero.getTablero());
+
+                        jugadas = jugador.EnviarJuagada(tablero.getTablero());
                         tablero.setTablero(jugadas);
                     } catch (IOException ex) {
                         Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                     
+
                 }
-                 
-                    
-            } else if (turno == 2) {
-                if (tablero.puedoMover(new Point(i, j))) {
-                    quitarPosibles();
-                    fichas[i][j].setIcon(imgblanca);
-                     
-                    tablero.ponerFicha(new Point(i, j), "blanca");
-                    //quitarPosibles();
-                    pintarEntrePuntos(tablero.validarMedios(new Point(i, j), "blanca"));
-                    pintarPosibles(tablero.validarMovimientos("negra"));
-                    
-                    //cantMov = jugador.CantidadFichas(tablero.getTablero());
-                    turno = 1;
-                    //tablero.mostrar();
-                    
-                     
-                }
+
+//            } else if (turno == 2) {
+//                if (tablero.puedoMover(new Point(best, j))) {
+//                    quitarPosibles();
+//                    fichas[i][j].setIcon(imgblanca);
+//
+//                    tablero.ponerFicha(new Point(i, j), "blanca");
+//                    //quitarPosibles();
+//                    pintarEntrePuntos(tablero.validarMedios(new Point(i, j), "blanca"));
+//                    pintarPosibles(tablero.validarMovimientos("negra"));
+//
+//                    //cantMov = jugador.CantidadFichas(tablero.getTablero());
+//                    turno = 1;
+//                    //tablero.mostrar();
+//
+//                }
 //                 if(tablero.getMov().isEmpty()){
 //                     System.out.println("La maquina no tiene jugada ");
 //                    turno=2;
 //                }
-                try {
-                        //tablero.mostrar();
-                        jugadas=jugador.EnviarJuagada(tablero.getTablero());
-                        tablero.setTablero(jugadas);
-                    } catch (IOException ex) {
-                        Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                 
+//                try {
+//                    //tablero.mostrar();
+//                    jugadas = jugador.EnviarJuagada(tablero.getTablero());
+//                    tablero.setTablero(jugadas);
+//                } catch (IOException ex) {
+//                    Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (ClassNotFoundException ex) {
+//                    Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+
             }
             if (tablero.tableroLLeno()) {
-                        ganador(tablero.getTablero());
-                    }
-              
+                ganador(tablero.getTablero());
+            }
+
         }
     }
 
@@ -237,5 +236,5 @@ String [][] jugadas= new String[8][8];
             JOptionPane.showMessageDialog(this, "Empate!!");
         }
     }
-    
+
 }

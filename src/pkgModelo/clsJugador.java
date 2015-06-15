@@ -15,13 +15,13 @@ import java.net.Socket;
  *
  * @author Ana
  */
-public class clsJugador{
-    
-private int id;
-private String nombre;
-private int juegosGanados;
-int cantFichasB;
-int cantFichasN;
+public class clsJugador {
+
+    private int id;
+    private String nombre;
+    private int juegosGanados;
+    int cantFichasB;
+    int cantFichasN;
 
     public int getId() {
         return id;
@@ -35,24 +35,24 @@ int cantFichasN;
         return juegosGanados;
     }
 
-    public int[] CantidadFichas(String[][] tablero){
-        int [] cantFichas=new int[2];
+    public int[] CantidadFichas(String[][] tablero) {
+        int[] cantFichas = new int[2];
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero.length; j++) {
-                if(tablero[i][j].equals("negra")){
-                    cantFichasN+=1;
-                } else  if(tablero[i][j].equals("blanca")){
-                    cantFichasB+=1;
+                if (tablero[i][j].equals("negra")) {
+                    cantFichasN += 1;
+                } else if (tablero[i][j].equals("blanca")) {
+                    cantFichasB += 1;
                 }
             }
-            cantFichas[0]=cantFichasN;
-            cantFichas[1]=cantFichasB;
+            cantFichas[0] = cantFichasB;
+            cantFichas[1] = cantFichasB;
         }
         return cantFichas;
     }
 //    
-    
-   //-------------------------------------------------------------------
+
+    //-------------------------------------------------------------------
     Socket s;
     ObjectInputStream ois;
     ObjectOutputStream oos;
@@ -75,20 +75,19 @@ int cantFichasN;
         System.out.println("cliente!!!");
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                System.out.print(" "+juego.getTablero()[i][j]);
+                System.out.print(" " + juego.getTablero()[i][j]);
             }
             System.out.println("");
         }
         oos.writeObject(juego);//escribe via socket la matriz
         juego = (clsTablero) ois.readObject();//lee via socket la matriz modificada en el server
-//        for (int i = 0; i < 8; i++) {
-//            for (int j = 0; j < 8; j++) {
-//                System.out.print(" " + juego.getMATRIZ()[i][j]);
-//            }
-//            System.out.println("");
-//        }
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                System.out.print(" " + juego.getTablero()[i][j]);
+            }
+            System.out.println("");
+        }        
         return juego.getTablero();
     }
 
-  
 }
