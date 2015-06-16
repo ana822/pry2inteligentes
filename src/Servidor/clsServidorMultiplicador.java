@@ -64,7 +64,9 @@ public class clsServidorMultiplicador implements Runnable {
                     }
                     System.out.println("");
                 }
-                System.out.println("");
+                System.out.println("PUNTOS A PINTAR SERVER");
+                juego.setX(mov.getPositionX());
+                juego.setY(mov.getPositionY());
                 juego.setTablero(Generarjugada(juego, mov));
                 oos.writeObject(juego);
             } catch (IOException | ClassNotFoundException ex) {
@@ -104,8 +106,8 @@ public class clsServidorMultiplicador implements Runnable {
                 Movement tmp = MiniMaxAlphaBetaDepth(successorBoard, player, depth + 1, alpha, beta);
 
                 if (best == null || (player == -1 && tmp.Value < best.Value) || (player == 1 && tmp.Value > best.Value)) {
-                    tmp.PositionX = poX;
-                    tmp.PositionY = poY;
+                    tmp.setPositionX(poX);
+                    tmp.setPositionY(poY);
                     best = tmp;
                 }
                 if (player == -1 && best.Value < beta) {

@@ -19,6 +19,8 @@ public class clsTablero implements Serializable {
     private clsFicha ficha = new clsFicha();
     private LinkedList<Point> mov;
     LinkedList<Point> puntosPintar;
+    private int x;
+    private int y;
 
     public LinkedList<Point> getMov() {
         return mov;
@@ -43,14 +45,15 @@ public class clsTablero implements Serializable {
         tablero[4][4] = ficha.getBlanca();
     }
 
-//    public void mostrar() {
-//        for (int i = 0; i < tablero.length; i++) {
-//            for (int j = 0; j < tablero.length; j++) {
-//                System.out.println(" " + tablero[i][j] + i + j);
-//            }
-//
-//        }
-//    }
+    public void mostrar() {
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero.length; j++) {
+                System.out.println(" " + tablero[i][j] + i + j);
+            }
+
+        }
+    }
+
     /**
      * meter una ficha en le tablero
      *
@@ -689,5 +692,21 @@ public class clsTablero implements Serializable {
     }
 
     public clsTablero() {
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

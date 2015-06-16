@@ -12,8 +12,8 @@ package Servidor;
 public class Movement {
 
     public int Value;
-    public int PositionX;
-    public int PositionY;
+    private int PositionX;
+    private int PositionY;
 
     public Movement() {
         PositionX = -1;

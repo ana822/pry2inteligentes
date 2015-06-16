@@ -69,7 +69,7 @@ public class clsJugador {
         juego = new clsTablero();
     }
 
-    public String[][] EnviarJuagada(String[][] tablero) throws IOException, ClassNotFoundException {
+    public clsTablero EnviarJuagada(String[][] tablero) throws IOException, ClassNotFoundException {
         //juego.setMultiplicador(2);
         juego.setTablero(tablero);
         System.out.println("cliente!!!");
@@ -86,8 +86,8 @@ public class clsJugador {
                 System.out.print(" " + juego.getTablero()[i][j]);
             }
             System.out.println("");
-        }        
-        return juego.getTablero();
+        }
+        return juego;
     }
 
 }
