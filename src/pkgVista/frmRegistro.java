@@ -5,6 +5,7 @@
  */
 package pkgVista;
 
+import Servidor.clsServidorMultiplicador;
 import javax.swing.JOptionPane;
 import pkgImagenFondo.imagenFondo;
 
@@ -17,14 +18,15 @@ public class frmRegistro extends javax.swing.JFrame {
     /**
      * Creates new form frmRegistro
      */
-     frmTablero tablero;
-     imagenFondo f;
+    frmTablero frmtablero;
+    pnlTablero panel;
+    imagenFondo f;
+
     public frmRegistro() {
         initComponents();
-       
         formWindowActivated(null);
+        frmtablero = new frmTablero();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,27 +104,30 @@ public class frmRegistro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       if (!this.txtNombre.getText().equals("")) {
+        if (!this.txtNombre.getText().equals("")) {
+            frmtablero.recibirJugador(txtNombre.getText());
             System.out.println("Aquiii estoy ");
-            tablero= new frmTablero();
-            tablero.setVisible(true);
-            this.setVisible(false);
+            frmtablero.setVisible(true);
+            //this.setVisible(false);
             dispose();
         } else {
-            JOptionPane.showMessageDialog(this,"Llene el nombre del jugador  por favor.","[X] Error:",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Llene el nombre del jugador  por favor.", "[X] Error:", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {                                     
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {
         f = new imagenFondo();
-       pnlRegistrar.add(f);           
-       pnlRegistrar.repaint();      
-    } 
+        pnlRegistrar.add(f);
+        pnlRegistrar.repaint();
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        Thread t = new Thread(new clsServidorMultiplicador());
+        t.start();
+        System.out.println("inicio servidor");
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import pkgModelo.clsEstadisticas;
 import pkgModelo.clsJugador;
 import pkgModelo.clsTablero;
 
@@ -40,11 +41,9 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
     clsJugador jugador;
     int[] cantMov;
     int turno;
-    clsTablero jugadas;
-    Movement mov;
-    
+
     public pnlTablero() {
-        
+
         initComponents();
         cantMov = new int[2];
         turno = 1;
@@ -65,7 +64,7 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
                 this.add(fichas[i][j]);
             }
         }
-        
+
         fichas[3][3].setIcon(imgblanca);
         fichas[3][4].setIcon(imgnegra);
         fichas[4][3].setIcon(imgnegra);
@@ -85,7 +84,7 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
             JOptionPane.showMessageDialog(this, "SERVIDOR NO DISPONIBLE");
             //Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     /**
@@ -114,18 +113,18 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
     // End of variables declaration//GEN-END:variables
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         int i = Integer.parseInt((e.getActionCommand().subSequence(1, 2).toString()));
         int j = Integer.parseInt((e.getActionCommand().subSequence(2, 3).toString()));
-        
+
         String ficha = "i" + i + j;
         if (ficha.equals(e.getActionCommand())) {
             if (turno == 1) {
-                
+
                 if (tablero.puedoMover(new Point(i, j))) {
                     quitarPosibles();
                     fichas[i][j].setIcon(imgnegra);
-                    
+
                     tablero.ponerFicha(new Point(i, j), "negra");
                     //quitarPosibles();
 
@@ -153,22 +152,22 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
                     quitarPosibles();
                     System.out.println("x,y");
                     System.out.println(tablero.getX() + "," + tablero.getY());
-                    
+
                     fichas[tablero.getX()][tablero.getY()].setIcon(imgblanca);
-                    
+
                     pintarEntrePuntos(tablero.validarMedios(new Point(tablero.getX(), tablero.getY()), "blanca"));
                     pintarPosibles(tablero.validarMovimientos("negra"));
                     turno = 1;
-                    
+
                 }
             }
             if (tablero.tableroLLeno()) {
                 ganador(tablero.getTablero());
             }
-            
+
         }
     }
-    
+
     public void pintarPosibles(LinkedList<Point> mov) {
         for (int i = 0; i < mov.size(); i++) {
             if (turno == 1) {
@@ -178,7 +177,7 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
             }
         }
     }
-    
+
     public void pintarEntrePuntos(LinkedList<Point> f) {
         for (int i = 0; i < f.size(); i++) {
             if (turno == 1) {
@@ -195,21 +194,21 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
     public void quitarPosibles() {
         for (int k = 0; k < fichas.length; k++) {
             for (int l = 0; l < fichas.length; l++) {
-                
+
                 if (fichas[k][l].getIcon().equals(imgmedionegra)) {
-                    
+
                     fichas[k][l].setIcon(imgvacia);
                 } else if (fichas[k][l].getIcon().equals(imgmedioblanca)) {
                     fichas[k][l].setIcon(imgvacia);
                 }
             }
-            
+
         }
     }
-    
+
     public void ganador(String[][] tab) {
         int[] mov;
-        
+
         mov = jugador.CantidadFichas(tab);
         if (mov[0] > mov[1]) {
             JOptionPane.showMessageDialog(this, "Jugador 1 Gana");
@@ -219,5 +218,21 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
             JOptionPane.showMessageDialog(this, "Empate!!");
         }
     }
-    
+    clsEstadisticas es = new clsEstadisticas();
+    clsJugador jug;
+
+//    public void recibirJugador(String nombre) {
+//        String juga = es.cargarDatos(nombre);
+//        if (!juga.equals("")) {
+//            txtEstadisticasJ.setText(juga);
+//        } else {
+//            jug = new clsJugador(nombre);
+//            es.guardarJugador(jug);
+//            es.guardarJugador("" + nombre + " 0 0 0");//EscribirLinea(""+nombre+" 0 0 0");
+//            juga = es.cargarDatos(nombre);
+//            txtEstadisticasJ.setText(juga);
+//        }
+//        txtEstadisticasT.setText(es.leerDatos());
+//    }
+
 }

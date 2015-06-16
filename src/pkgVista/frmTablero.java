@@ -6,6 +6,8 @@
 package pkgVista;
 
 import Servidor.clsServidorMultiplicador;
+import pkgModelo.clsEstadisticas;
+import pkgModelo.clsJugador;
 
 /**
  *
@@ -37,11 +39,21 @@ public class frmTablero extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         pnlTablero1 = new pkgVista.pnlTablero();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtn = new javax.swing.JTextField();
         txtb = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtEstadisticasT = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtEstadisticasJ = new javax.swing.JTextArea();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +69,15 @@ public class frmTablero extends javax.swing.JFrame {
         });
 
         txtb.setText("jTextField1");
+
+        txtEstadisticasT.setColumns(20);
+        txtEstadisticasT.setRows(5);
+        jScrollPane2.setViewportView(txtEstadisticasT);
+
+        txtEstadisticasJ.setColumns(20);
+        txtEstadisticasJ.setRows(5);
+        txtEstadisticasJ.setText("allan 0 0 0");
+        jScrollPane3.setViewportView(txtEstadisticasJ);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +95,13 @@ public class frmTablero extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addComponent(txtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,14 +112,18 @@ public class frmTablero extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(pnlTablero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(178, 178, 178)
+                        .addGap(64, 64, 64)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -102,15 +133,30 @@ public class frmTablero extends javax.swing.JFrame {
     private void txtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnActionPerformed
 
     }//GEN-LAST:event_txtnActionPerformed
-
+    clsEstadisticas es=new clsEstadisticas();
+    clsJugador jug;
+    public void recibirJugador(String nombre) {
+        System.out.println("recibeJugador");
+        String juga = es.cargarDatos(nombre);
+        if (!juga.equals("")) {
+            System.out.println("Nombre != Vacio");
+            txtEstadisticasJ.setText(juga);
+        } else {
+            System.out.println("Creando Jugador");
+            jug = new clsJugador(nombre);
+            es.guardarJugador(jug);
+            es.guardarJugador("" + nombre + " 0 0 0");//EscribirLinea(""+nombre+" 0 0 0");
+            juga = es.cargarDatos(nombre);
+            txtEstadisticasJ.setText(juga);
+        }
+        txtEstadisticasT.setText(es.leerDatos());
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        Thread t = new Thread(new clsServidorMultiplicador());
-        t.start();
-        System.out.println("inicio servidor");
+               
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -145,7 +191,13 @@ public class frmTablero extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
     private pkgVista.pnlTablero pnlTablero1;
+    private javax.swing.JTextArea txtEstadisticasJ;
+    private javax.swing.JTextArea txtEstadisticasT;
     private javax.swing.JTextField txtb;
     private javax.swing.JTextField txtn;
     // End of variables declaration//GEN-END:variables

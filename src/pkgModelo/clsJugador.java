@@ -20,6 +20,8 @@ public class clsJugador {
     private int id;
     private String nombre;
     private int juegosGanados;
+    private int juegosPerdidos;
+    private int juegosEmpatados;
     int cantFichasB;
     int cantFichasN;
 
@@ -33,6 +35,14 @@ public class clsJugador {
 
     public int getJuegosGanados() {
         return juegosGanados;
+    }
+
+    public int getJuegosEmpatados() {
+        return juegosEmpatados;
+    }
+
+    public int getJuegosPerdidos() {
+        return juegosPerdidos;
     }
 
     public int[] CantidadFichas(String[][] tablero) {
@@ -50,8 +60,11 @@ public class clsJugador {
         }
         return cantFichas;
     }
-//    
 
+    public clsJugador(String nombre) {
+        this.nombre = nombre;
+    }
+//    
     //-------------------------------------------------------------------
     Socket s;
     ObjectInputStream ois;
