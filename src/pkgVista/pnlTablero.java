@@ -133,9 +133,7 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
                     //cantMov = jugador.CantidadFichas(tablero.getTablero());
 
                     turno = 2;
-                    if (tablero.tableroLLeno()) {
-                        ganador(tablero.getTablero());
-                    }
+
                     System.out.println("estasss sooooon " + tablero.getTablero()[i][j]);
                     try {
                         //tablero.mostrar();
@@ -158,7 +156,6 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
                     pintarEntrePuntos(tablero.validarMedios(new Point(tablero.getX(), tablero.getY()), "blanca"));
                     pintarPosibles(tablero.validarMovimientos("negra"));
                     turno = 1;
-
                 }
             }
             if (tablero.tableroLLeno()) {
@@ -211,10 +208,13 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
 
         mov = jugador.CantidadFichas(tab);
         if (mov[0] > mov[1]) {
-            JOptionPane.showMessageDialog(this, "Jugador 1 Gana");
-        } else if (mov[0] < mov[1]) {
+            jugador.gano();
             JOptionPane.showMessageDialog(this, "Game Over");
+        } else if (mov[0] < mov[1]) {
+            jugador.perdio();
+            JOptionPane.showMessageDialog(this, "Jugador 1 Gana");
         } else {
+            jugador.empato();
             JOptionPane.showMessageDialog(this, "Empate!!");
         }
     }
@@ -234,5 +234,4 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
 //        }
 //        txtEstadisticasT.setText(es.leerDatos());
 //    }
-
 }

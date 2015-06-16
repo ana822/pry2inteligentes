@@ -19,7 +19,7 @@ import pkgModelo.clsJugador;
 
 /**
  *
- * @author michael
+ * @author Ana
  */
 public class clsServidorMultiplicador implements Runnable {
 
@@ -90,7 +90,7 @@ public class clsServidorMultiplicador implements Runnable {
 
     // Poda Alfa-Beta con profundidad 
     private Movement MiniMaxAlphaBetaDepth(clsTablero board, int player, int depth, int alpha, int beta) {
-        if (board.GameEnded() || depth == 3) {
+        if (board.GameEnded() || depth == 1) {
             Movement mov = new Movement();
             //mov.Value = board.Winner();
             mov.Value = Utilidad(board.getTablero());

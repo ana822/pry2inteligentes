@@ -7,7 +7,7 @@ package Servidor;
 
 /**
  *
- * @author michael
+ * @author Ana
  */
 public class clsIniciarservidor {
     public static void main(String[] args) {

@@ -38,7 +38,7 @@ public class clsEstadisticas {
 
         /*Comprobamos si existe, si no lo creamos.*/
         if (archivo.LeerContenido() == null) {
-            archivo.EscribirContenido("Camilo 0 0 0");
+            archivo.EscribirContenido("Ana 5 0 0");
         }
 
         /*Leemos las estadisticas.*/

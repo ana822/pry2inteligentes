@@ -145,7 +145,7 @@ public class frmTablero extends javax.swing.JFrame {
             System.out.println("Creando Jugador");
             jug = new clsJugador(nombre);
             es.guardarJugador(jug);
-            es.guardarJugador("" + nombre + " 0 0 0");//EscribirLinea(""+nombre+" 0 0 0");
+//            es.guardarJugador("" + nombre + " 0 0 0");//EscribirLinea(""+nombre+" 0 0 0");
             juga = es.cargarDatos(nombre);
             txtEstadisticasJ.setText(juga);
         }

@@ -19,11 +19,26 @@ public class clsJugador {
 
     private int id;
     private String nombre;
-    private int juegosGanados;
-    private int juegosPerdidos;
-    private int juegosEmpatados;
-    int cantFichasB;
-    int cantFichasN;
+    private int juegosGanados=0;
+    private int juegosPerdidos=0;
+    private int juegosEmpatados=0;
+    int cantFichasB = 0;
+    int cantFichasN = 0;
+
+    public void gano() {
+        juegosGanados++;
+         System.out.println("cant ganada "+ juegosGanados);
+    }
+
+    public void perdio() {
+        juegosPerdidos++;
+        System.out.println("cant perdida "+ juegosPerdidos);
+    }
+
+    public void empato() {
+        juegosEmpatados++;
+         System.out.println("cant empatada "+ juegosEmpatados);
+    }
 
     public int getId() {
         return id;
@@ -47,17 +62,19 @@ public class clsJugador {
 
     public int[] CantidadFichas(String[][] tablero) {
         int[] cantFichas = new int[2];
-        for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero.length; j++) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
                 if (tablero[i][j].equals("negra")) {
-                    cantFichasN += 1;
+                    cantFichasN = cantFichasN + 1;
                 } else if (tablero[i][j].equals("blanca")) {
-                    cantFichasB += 1;
+                    cantFichasB = cantFichasB + 1;
                 }
             }
             cantFichas[0] = cantFichasB;
-            cantFichas[1] = cantFichasB;
+            cantFichas[1] = cantFichasN;
         }
+        System.out.println("Fichas Blancas" + cantFichas[0]);
+        System.out.println("Fichas Negras" + cantFichas[1]);
         return cantFichas;
     }
 
