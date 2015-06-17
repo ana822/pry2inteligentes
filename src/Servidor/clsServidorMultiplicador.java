@@ -53,16 +53,7 @@ public class clsServidorMultiplicador implements Runnable {
             try {
                 juego = (clsTablero) ois.readObject();
 //                String[][] tablero =  MultiplicaMatriz();
-                Movement mov = MiniMaxAlphaBetaDepth(juego, 1, 0, -1, 1);
-
-                System.out.println("sevidor!!!");
-                for (int i = 0; i < 8; i++) {
-                    for (int j = 0; j < 8; j++) {
-                        System.out.print(" " + juego.getTablero()[i][j]);
-                    }
-                    System.out.println("");
-                }
-                System.out.println("PUNTOS A PINTAR SERVER");
+                Movement mov = MiniMaxAlphaBetaDepth(juego, 1, 0, -1, 1);          
                 juego.setX(mov.getPositionX());
                 juego.setY(mov.getPositionY());
                 juego.setTablero(Generarjugada(juego, mov));

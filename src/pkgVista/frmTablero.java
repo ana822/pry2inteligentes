@@ -25,17 +25,23 @@ public class frmTablero extends javax.swing.JFrame {
     ImagenArriba f;
     ImagenIzq f1;
 frmRegistro r;
+frmTablero t=this;
   
     public frmTablero() {
         initComponents();
+        
         this.getContentPane().setBackground(Color.BLUE);
         formWindowActivated(null);
-       
+       pnlTablero1.obtenerformulario(t);
         //cantFichas=pnlTablero1.cantMov;
         negras = cantFichas[0];
         blancas = cantFichas[1];
        //txtn.setText(String.valueOf(negras));
         //txtb.setText(String.valueOf(blancas));
+    }
+    public void mostrarfichas(int[] numfichas) {
+        jljugador.setText("" + numfichas[0]);
+        jlpc.setText("" + numfichas[1]);
     }
 
     /**
@@ -158,17 +164,17 @@ frmRegistro r;
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(143, 143, 143)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jljugador, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jljugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2))
                 .addGap(87, 87, 87)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jlpc, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jlpc, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

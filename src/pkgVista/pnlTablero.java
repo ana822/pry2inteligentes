@@ -39,11 +39,12 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
     clsJugador jugador;
     int[] cantMov;
     int turno;
+    frmTablero t;
 
     public pnlTablero() {
 
         initComponents();
-
+obtenerformulario(t);
         cantMov = new int[2];
         turno = 1;
         tablero = new clsTablero();
@@ -57,9 +58,6 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
                 fichas[i][j].addActionListener(this);
                 tablero.llenarMatriz();
                 tablero.estadoInicial();
-//                tablero.mostrar();
-                //fichas [i][j].setIcon(imgvacia);
-
                 this.add(fichas[i][j]);
             }
         }
@@ -74,8 +72,6 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
         fichas[2][3].setIcon(imgmedionegra);
         fichas[4][5].setIcon(imgmedionegra);
 
-        //fichas [5][3].setIcon(imgblanca);
-        // fichas [5][2].setIcon(imgnegra);
         tablero.llenarPosiblesMovimientosInicial();
         try {
             jugador = new clsJugador();
@@ -83,9 +79,11 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
             JOptionPane.showMessageDialog(this, "SERVIDOR NO DISPONIBLE");
             //Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
         }
-//frmTablero juego = new frmTablero();
-    }
 
+    }
+ public void obtenerformulario(frmTablero frm) {
+        this.t = frm;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -129,7 +127,8 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
                     tablero.ponerFicha(new Point(i, j), "negra");
                     pintarEntrePuntos(tablero.validarMedios(new Point(i, j), "negra"));
                     turno = 2;
-                    System.out.println("estasss sooooon " + tablero.getTablero()[i][j]);
+                   t.mostrarfichas(tablero.contarfichas());
+                
                     try {
                         tablero = jugador.EnviarJuagada(tablero.getTablero());
 
@@ -143,6 +142,7 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
                     pintarEntrePuntos(tablero.validarMedios(new Point(tablero.getX(), tablero.getY()), "blanca"));
                     pintarPosibles(tablero.validarMovimientos("negra"));
                     turno = 1;
+                    t.mostrarfichas(tablero.contarfichas());
                 }
             }
             if (tablero.tableroLLeno()) {

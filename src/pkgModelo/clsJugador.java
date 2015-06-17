@@ -115,24 +115,9 @@ public class clsJugador {
  * @throws ClassNotFoundException 
  */
     public clsTablero EnviarJuagada(String[][] tablero) throws IOException, ClassNotFoundException {
-        //juego.setMultiplicador(2);
         juego.setTablero(tablero);
-        System.out.println("cliente!!!");
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                System.out.print(" " + juego.getTablero()[i][j]);
-            }
-            System.out.println("");
-        }
         oos.writeObject(juego);//escribe via socket la matriz
         juego = (clsTablero) ois.readObject();//lee via socket la matriz modificada en el server
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                System.out.print(" " + juego.getTablero()[i][j]);
-            }
-            System.out.println("");
-        }
         return juego;
     }
-
 }

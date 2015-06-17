@@ -22,6 +22,7 @@ public class clsTablero implements Serializable {
     LinkedList<Point> puntosPintar;
     private int x;
     private int y;
+    int[] numfichas = new int[2];
 
     public LinkedList<Point> getMov() {
         return mov;
@@ -450,7 +451,7 @@ public class clsTablero implements Serializable {
                         break;
                     } else {
                         puntosPintar.add(new Point(i, j));
-                        System.out.println("jmmm aquui " + i + j);
+                        //System.out.println("jmmm aquui " + i + j);
                     }
                 }
             }
@@ -462,7 +463,7 @@ public class clsTablero implements Serializable {
                         break;
                     } else {
                         puntosPintar.add(new Point(i, j));
-                        System.out.println("jmmm aquui " + i + j);
+                        //System.out.println("jmmm aquui " + i + j);
                     }
                 }
             }
@@ -474,7 +475,7 @@ public class clsTablero implements Serializable {
                         break;
                     } else {
                         puntosPintar.add(new Point(i, j));
-                        System.out.println("jmmm aquui " + i + j);
+                       // System.out.println("jmmm aquui " + i + j);
                     }
                 }
             }
@@ -486,7 +487,7 @@ public class clsTablero implements Serializable {
                         break;
                     } else {
                         puntosPintar.add(new Point(i, j));
-                        System.out.println("jmmm aquui " + i + j);
+                        //System.out.println("jmmm aquui " + i + j);
                     }
                 }
             }
@@ -539,9 +540,9 @@ public class clsTablero implements Serializable {
         this.tablero = tablero;
     }
 
-   /**
-    * Chekea el tablero, determina si hay ganador, Return -1, 1 ó 0
-   */
+    /**
+     * Chekea el tablero, determina si hay ganador, Return -1, 1 ó 0
+     */
     public int GetWinner() {
         int winner = 0;
         winner = terminado(getTablero());
@@ -558,6 +559,7 @@ public class clsTablero implements Serializable {
 
     /**
      * chekea si todas las posiciones estan ocupadas
+     *
      * @return true o false
      */
     public boolean IsTie() {
@@ -577,8 +579,9 @@ public class clsTablero implements Serializable {
 
     /**
      * devolver quien es el ganador; 0=empate;1=Jugador;2=Maquina
+     *
      * @param tablero
-     * @return 
+     * @return
      */
     public int terminado(String[][] tablero) {
         int cantFichasN = 0;
@@ -607,10 +610,35 @@ public class clsTablero implements Serializable {
             }
         }
     }
-/**
- * Se crea una copia del tablero actual
- * @return 
- */
+
+    /**
+     * metodo que calcula cuantas fichas negras y blancas hay en el tablero
+     *
+     * @return
+     */
+    public int[] contarfichas() {
+        int n = 0;
+        int b = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (tablero[i][j].equals("negra")) {
+                    n++;
+                }
+                if (tablero[i][j].equals("blanca")) {
+                    b++;
+                }
+            }
+        }
+        numfichas[0] = n;
+        numfichas[1] = b;
+        return numfichas;
+    }
+
+    /**
+     * Se crea una copia del tablero actual
+     *
+     * @return
+     */
     public Object Clone() {
         clsTablero board = new clsTablero(tablero);
         return board;
