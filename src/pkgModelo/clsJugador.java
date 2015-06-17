@@ -12,8 +12,8 @@ import java.io.Serializable;
 import java.net.Socket;
 
 /**
- *
- * @author Ana
+ *La clase jugador contiene el lado cliente de la conexión y los atributos de un jugador para llevar las estadisticas del juego
+ * @author Ana Paola Martinez y Carlos Garcia
  */
 public class clsJugador {
 
@@ -24,17 +24,22 @@ public class clsJugador {
     private int juegosEmpatados=0;
     int cantFichasB = 0;
     int cantFichasN = 0;
-
+/**
+ * Me aumenta en uno si el jugador gana
+ */
     public void gano() {
         juegosGanados++;
-         System.out.println("cant ganada "+ juegosGanados);
     }
-
+/**
+ * Me aumenta en uno si el jugador pierde
+ */
     public void perdio() {
         juegosPerdidos++;
         System.out.println("cant perdida "+ juegosPerdidos);
     }
-
+/**
+ * Me aumenta en uno si el jugador empata
+ */
     public void empato() {
         juegosEmpatados++;
          System.out.println("cant empatada "+ juegosEmpatados);
@@ -59,7 +64,11 @@ public class clsJugador {
     public int getJuegosPerdidos() {
         return juegosPerdidos;
     }
-
+/**
+ * Me de vuelve en un vector de dos posiciones la v¿cantidad de fichas negras y la cantidad de fichas blancas que tiene el tablero
+ * @param tablero
+ * @return 
+ */
     public int[] CantidadFichas(String[][] tablero) {
         int[] cantFichas = new int[2];
         for (int i = 0; i < 8; i++) {
@@ -98,7 +107,13 @@ public class clsJugador {
         ois = new ObjectInputStream(s.getInputStream());
         juego = new clsTablero();
     }
-
+/**
+ * Envía la jugada y recibe la jugada del servidor
+ * @param tablero
+ * @return
+ * @throws IOException
+ * @throws ClassNotFoundException 
+ */
     public clsTablero EnviarJuagada(String[][] tablero) throws IOException, ClassNotFoundException {
         //juego.setMultiplicador(2);
         juego.setTablero(tablero);

@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * En el frmRegistro solo se muestra la casilla para que el usuario ingrese y me lo lleva al tablero de juego
  */
 package pkgVista;
 
@@ -11,7 +9,7 @@ import pkgImagenFondo.imagenFondo;
 
 /**
  *
- * @author Ana
+ * @author Ana Paola MArtinez y Carlos Garcia
  */
 public class frmRegistro extends javax.swing.JFrame {
 
@@ -105,10 +103,11 @@ public class frmRegistro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (!this.txtNombre.getText().equals("")) {
-            frmtablero.recibirJugador(txtNombre.getText());
+            //frmtablero.recibirJugador(txtNombre.getText());
             
-            System.out.println("Aquiii estoy ");
+            
             frmtablero.setVisible(true);
+            
             //this.setVisible(false);
             dispose();
         } else {

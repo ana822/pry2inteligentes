@@ -10,8 +10,9 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
+ * En esta clase se encuentra toda la logica del juego de othelo
  *
- * @author Ana
+ * @author Ana Paola Martinez y Carlos Garcia
  */
 public class clsTablero implements Serializable {
 
@@ -30,6 +31,10 @@ public class clsTablero implements Serializable {
         this.mov = mov;
     }
 
+    /**
+     * Se llena la matriz inicialmente con todas las casillas vacias, es decir,
+     * sin fichas
+     */
     public void llenarMatriz() {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero.length; j++) {
@@ -38,6 +43,9 @@ public class clsTablero implements Serializable {
         }
     }
 
+    /**
+     * El estado inicial en el que empieza el juego
+     */
     public void estadoInicial() {
         tablero[3][3] = ficha.getBlanca();
         tablero[3][4] = ficha.getNegra();
@@ -45,6 +53,9 @@ public class clsTablero implements Serializable {
         tablero[4][4] = ficha.getBlanca();
     }
 
+    /**
+     * Me imprime lo que tiene actualmente el tablero de juego
+     */
     public void mostrar() {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero.length; j++) {
@@ -55,7 +66,7 @@ public class clsTablero implements Serializable {
     }
 
     /**
-     * meter una ficha en le tablero
+     * Pone una ficha en le tablero
      *
      * @param pos
      * @param ficha
@@ -107,22 +118,16 @@ public class clsTablero implements Serializable {
 //arriba
 
                 if ((i - 1) > 0 && tablero[i][j].equals(ficha) && tablero[i - 1][j].equals(fichaContraria(ficha))) {
-                    //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 0);
                     if (p.getX() != -100 && p.getY() != -100) {
-
                         mov.add(p);
-                        //System.out.println("estos son " + mov);
                     }
                 }
 //abajo               
                 if ((i + 1) < 7 && tablero[i][j].equals(ficha) && tablero[i + 1][j].equals(fichaContraria(ficha))) {
-                    //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 1);
                     if (p.getX() != -100 && p.getY() != -100) {
-
                         mov.add(p);
-                        //System.out.println("estos son " + mov);
                     }
                 }
 //izquierda   
@@ -130,9 +135,7 @@ public class clsTablero implements Serializable {
                     //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 2);
                     if (p.getX() != -100 && p.getY() != -100) {
-
                         mov.add(p);
-                        //System.out.println("estos son " + mov);
                     }
                 }
 //derecha
@@ -140,49 +143,35 @@ public class clsTablero implements Serializable {
                     //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 3);
                     if (p.getX() != -100 && p.getY() != -100) {
-
                         mov.add(p);
-                        //System.out.println("estos son " + mov);
                     }
                 }
 //arriba-izquierda
                 if ((i - 1) > 0 && (j - 1) > 0 && tablero[i][j].equals(ficha) && tablero[i - 1][j - 1].equals(fichaContraria(ficha))) {
-                    //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 4);
                     if (p.getX() != -100 && p.getY() != -100) {
-
                         mov.add(p);
-                        //System.out.println("estos son " + mov);
                     }
                 }
 //abajo-izquierda
                 if ((i + 1) < 7 && (j - 1) > 0 && tablero[i][j].equals(ficha) && tablero[i + 1][j - 1].equals(fichaContraria(ficha))) {
-                    //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 5);
                     if (p.getX() != -100 && p.getY() != -100) {
-
                         mov.add(p);
-                        //System.out.println("estos son " + mov);
                     }
                 }
 //arriba-derecha
                 if ((i - 1) > 0 && (j + 1) < 7 && tablero[i][j].equals(ficha) && tablero[i - 1][j + 1].equals(fichaContraria(ficha))) {
-                    //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 6);
                     if (p.getX() != -100 && p.getY() != -100) {
-
                         mov.add(p);
-                        //System.out.println("estos son " + mov);
                     }
                 }
 //abajo-derecha  
                 if ((i + 1) < 7 && (j + 1) < 7 && tablero[i][j].equals(ficha) && tablero[i + 1][j + 1].equals(fichaContraria(ficha))) {
-                    //System.out.println("holaaaaaaaaaaaa mamáaa");
                     p = movReversi(new Point(i, j), ficha, 7);
                     if (p.getX() != -100 && p.getY() != -100) {
-
                         mov.add(p);
-                        //System.out.println("estos son " + mov);
                     }
                 }
             }
@@ -206,11 +195,8 @@ public class clsTablero implements Serializable {
 
 //arriba
         if (mov == 0) {
-
             for (int i = (int) punto.getX() - 1; i > 0; i--) {
-
                 if (tablero[i][(int) punto.getY()].equals(fichaContraria(ficha))) {
-
                     if (tablero[i - 1][(int) punto.getY()].equals("vacia")) {
                         p.setLocation(i - 1, (int) punto.getY());
                         break;
@@ -221,11 +207,8 @@ public class clsTablero implements Serializable {
         }
 //abajo        
         if (mov == 1) {
-
             for (int i = (int) punto.getX() + 1; i < 7; i++) {
-
                 if (tablero[i][(int) punto.getY()].equals(fichaContraria(ficha))) {
-
                     if (tablero[i + 1][(int) punto.getY()].equals("vacia")) {
                         p.setLocation(i + 1, (int) punto.getY());
                         break;
@@ -261,11 +244,8 @@ public class clsTablero implements Serializable {
         }
 //arriba-izquierda
         if (mov == 4) {
-
             for (int i = (int) punto.getX() - 1, j = (int) punto.getY() - 1; i > 0 && j > 0; i--, j--) {
-
                 if (tablero[i][j].equals(fichaContraria(ficha))) {
-
                     if (tablero[i - 1][j - 1].equals("vacia")) {
                         p.setLocation(i - 1, j - 1);
                         break;
@@ -276,11 +256,8 @@ public class clsTablero implements Serializable {
         }
 //abajo-izquierda
         if (mov == 5) {
-
             for (int i = (int) punto.getX() + 1, j = (int) punto.getY() - 1; i < 7 && j > 0; i++, j--) {
-
                 if (tablero[i][j].equals(fichaContraria(ficha))) {
-
                     if (tablero[i + 1][j - 1].equals("vacia")) {
                         p.setLocation(i + 1, j - 1);
                         break;
@@ -291,11 +268,8 @@ public class clsTablero implements Serializable {
         }
 //arriba-derecha
         if (mov == 6) {
-
             for (int i = (int) punto.getX() - 1, j = (int) punto.getY() + 1; i > 0 && j < 7; i--, j++) {
-
                 if (tablero[i][j].equals(fichaContraria(ficha))) {
-
                     if (tablero[i - 1][j + 1].equals("vacia")) {
                         p.setLocation(i - 1, j + 1);
                         break;
@@ -306,11 +280,8 @@ public class clsTablero implements Serializable {
         }
 //abajo-derecha     
         if (mov == 7) {
-
             for (int i = (int) punto.getX() + 1, j = (int) punto.getY() + 1; i < 7 && j < 7; i++, j++) {
-
                 if (tablero[i][j].equals(fichaContraria(ficha))) {
-
                     if (tablero[i + 1][j + 1].equals("vacia")) {
                         p.setLocation(i + 1, j + 1);
                         break;
@@ -349,40 +320,27 @@ public class clsTablero implements Serializable {
         Point pfinal = new Point();
 //arriba
         if (mov == 0) {
-
             for (int i = (int) pinicial.getX(); i >= 0; i--) {
-
                 if (tablero[i][(int) pinicial.getY()].equals(ficha)) {
                     pfinal.setLocation(i, (int) pinicial.getY());
-
                 }
-
             }
         }
 //abajo        
         if (mov == 1) {
-            //if (pfinal.getX() >= pinicial.getX() && pfinal.getY() == pinicial.getY()) {
             for (int i = (int) pinicial.getX(); i < 8; i++) {
-
                 if (tablero[i][(int) pinicial.getY()].equals(ficha)) {
                     pfinal.setLocation(i, (int) pinicial.getY());
-
                 }
             }
-            //}
         }
 //izquierda        
         if (mov == 2) {
-
-            //if (pfinal.getY() <= pinicial.getY() && pfinal.getX() == pinicial.getX()) {
             for (int i = (int) pinicial.getY(); i >= 0; i--) {
-
                 if (tablero[(int) pinicial.getX()][i].equals(ficha)) {
                     pfinal.setLocation((int) pinicial.getX(), i);
-
                 }
             }
-            //}
         }
 //derecha        
         if (mov == 3) {
@@ -393,46 +351,33 @@ public class clsTablero implements Serializable {
             }
         }
         if (mov == 4) {
-
-            //if (pfinal.getY() <= pinicial.getY() && pfinal.getX() == pinicial.getX()) {
             for (int i = (int) pinicial.getX(), j = (int) pinicial.getY(); i >= 0 && j >= 0; i--, j--) {
-
                 if (tablero[i][j].equals(ficha)) {
                     pfinal.setLocation(i, j);
-
                 }
             }
         }
 //arriba-derecha        
         if (mov == 5) {
-
             for (int i = (int) pinicial.getX(), j = (int) pinicial.getY(); i >= 0 && j < 8; i--, j++) {
-
                 if (tablero[i][j].equals(ficha)) {
                     pfinal.setLocation(i, j);
-
                 }
             }
         }
 //abajo-izquierda         
         if (mov == 6) {
-
             for (int i = (int) pinicial.getX(), j = (int) pinicial.getY(); i < 8 && j >= 0; i++, j--) {
-
                 if (tablero[i][j].equals(ficha)) {
                     pfinal.setLocation(i, j);
-
                 }
             }
         }
 //abajo-derecha          
         if (mov == 7) {
-
             for (int i = (int) pinicial.getX(), j = (int) pinicial.getY(); i < 8 && j < 8; i++, j++) {
-
                 if (tablero[i][j].equals(ficha)) {
                     pfinal.setLocation(i, j);
-
                 }
             }
         }
@@ -449,48 +394,38 @@ public class clsTablero implements Serializable {
      */
     public LinkedList<Point> validarMedios(Point posIni, String ficha) {
         puntosPintar = new LinkedList<>();
-
         for (int mov = 0; mov < 8; mov++) {
             Point posFinal = ultimaFicha(posIni, ficha, mov);
-            // arriba           
+// arriba           
             if (mov == 0) {
-
                 //if (posFinal.getX() <= posIni.getX() && posIni.getY() == posFinal.getY()) {
                 for (int i = (int) posIni.getX(); i >= (int) posFinal.getX(); i--) {
                     if (tablero[i][(int) posIni.getY()].equals("vacia")) {
                         puntosPintar.clear();
                         break;
-
                     } else {
                         puntosPintar.add(new Point(i, (int) posIni.getY()));
                     }
                 }
             }
-            //}
-            //abajo
-            if (mov == 1) {
 
-                // if (posFinal.getX() >= posIni.getX() && posIni.getY() == posFinal.getY()) {
+//abajo
+            if (mov == 1) {
                 for (int i = (int) posIni.getX(); i <= (int) posFinal.getX(); i++) {
                     if (tablero[i][(int) posIni.getY()].equals("vacia")) {
                         puntosPintar.clear();
                         break;
-
                     } else {
                         puntosPintar.add(new Point(i, (int) posIni.getY()));
                     }
                 }
-                //}
             }
 //izquierda
             if (mov == 2) {
-
-                //if (posFinal.getY() >= posIni.getX() && posIni.getX() == posFinal.getX()) {
                 for (int i = (int) posIni.getY(); i >= (int) posFinal.getY(); i--) {
                     if (tablero[(int) posIni.getX()][i].equals("vacia")) {
                         puntosPintar.clear();
                         break;
-
                     } else {
                         puntosPintar.add(new Point((int) posIni.getX(), i));
                     }
@@ -498,13 +433,10 @@ public class clsTablero implements Serializable {
             }
 //derecha            
             if (mov == 3) {
-
-                //if (posFinal.getY() >= posIni.getX() && posIni.getX() == posFinal.getX()) {
                 for (int i = (int) posIni.getY(); i < (int) posFinal.getY(); i++) {
                     if (tablero[(int) posFinal.getX()][i].equals("vacia")) {
                         puntosPintar.clear();
                         break;
-
                     } else {
                         puntosPintar.add(new Point((int) posIni.getX(), i));
                     }
@@ -512,13 +444,10 @@ public class clsTablero implements Serializable {
             }
 //arriba - izquierda  
             if (mov == 4) {
-
-                //if (posFinal.getY() >= posIni.getX() && posIni.getX() == posFinal.getX()) {
                 for (int i = (int) posIni.getX(), j = (int) posIni.getY(); i >= (int) posFinal.getX() && j >= (int) posFinal.getY(); i--, j--) {
                     if (tablero[i][j].equals("vacia")) {
                         puntosPintar.clear();
                         break;
-
                     } else {
                         puntosPintar.add(new Point(i, j));
                         System.out.println("jmmm aquui " + i + j);
@@ -527,13 +456,10 @@ public class clsTablero implements Serializable {
             }
 //arriba-derecha            
             if (mov == 5) {
-
-                //if (posFinal.getY() >= posIni.getX() && posIni.getX() == posFinal.getX()) {
                 for (int i = (int) posIni.getX(), j = (int) posIni.getY(); i >= (int) posFinal.getX() && j < (int) posFinal.getY(); i--, j++) {
                     if (tablero[i][j].equals("vacia")) {
                         puntosPintar.clear();
                         break;
-
                     } else {
                         puntosPintar.add(new Point(i, j));
                         System.out.println("jmmm aquui " + i + j);
@@ -542,13 +468,10 @@ public class clsTablero implements Serializable {
             }
 // abajo -  izquierda       
             if (mov == 6) {
-
-                //if (posFinal.getY() >= posIni.getX() && posIni.getX() == posFinal.getX()) {
                 for (int i = (int) posIni.getX(), j = (int) posIni.getY(); i < (int) posFinal.getX() && j >= (int) posFinal.getY(); i++, j--) {
                     if (tablero[i][j].equals("vacia")) {
                         puntosPintar.clear();
                         break;
-
                     } else {
                         puntosPintar.add(new Point(i, j));
                         System.out.println("jmmm aquui " + i + j);
@@ -557,13 +480,10 @@ public class clsTablero implements Serializable {
             }
 //abajo-derecha            
             if (mov == 7) {
-
-                //if (posFinal.getY() >= posIni.getX() && posIni.getX() == posFinal.getX()) {
                 for (int i = (int) posIni.getX(), j = (int) posIni.getY(); i < (int) posFinal.getX() && j < (int) posFinal.getY(); i++, j++) {
                     if (tablero[i][j].equals("vacia")) {
                         puntosPintar.clear();
                         break;
-
                     } else {
                         puntosPintar.add(new Point(i, j));
                         System.out.println("jmmm aquui " + i + j);
@@ -619,7 +539,9 @@ public class clsTablero implements Serializable {
         this.tablero = tablero;
     }
 
-    /// Chekea el tablero, determina si hay ganador, Return -1, 1 ó 0
+   /**
+    * Chekea el tablero, determina si hay ganador, Return -1, 1 ó 0
+   */
     public int GetWinner() {
         int winner = 0;
         winner = terminado(getTablero());
@@ -634,8 +556,10 @@ public class clsTablero implements Serializable {
         return winner;
     }
 
-    /// chekea si todas las posiciones estan ocupadas        
-    /// retorna true o false
+    /**
+     * chekea si todas las posiciones estan ocupadas
+     * @return true o false
+     */
     public boolean IsTie() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -651,7 +575,11 @@ public class clsTablero implements Serializable {
         return (GetWinner() != 0 || IsTie());
     }
 
-    //devolver quien es el ganador; 0=empate;1=Jugador;2=Maquina
+    /**
+     * devolver quien es el ganador; 0=empate;1=Jugador;2=Maquina
+     * @param tablero
+     * @return 
+     */
     public int terminado(String[][] tablero) {
         int cantFichasN = 0;
         if (tableroLLeno()) {
@@ -679,15 +607,12 @@ public class clsTablero implements Serializable {
             }
         }
     }
-
+/**
+ * Se crea una copia del tablero actual
+ * @return 
+ */
     public Object Clone() {
         clsTablero board = new clsTablero(tablero);
-//        for (int i = 0; i < board.getTablero().length; i++) {
-//            for (int j = 0; j < board.getTablero().length; j++) {
-//                System.out.print(board.getTablero()[i][j]);
-//            }
-//            System.out.println("");
-//        }
         return board;
     }
 

@@ -1,13 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * La clase movement el cual es el punto que enviará el servidor a partir de la mejor jugada
  */
 package Servidor;
 
 /**
  *
- * @author cagj__000
+ * @author Carlos Garcia y Ana Paola Martinez
  */
 public class Movement {
 

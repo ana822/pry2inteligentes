@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Este frame es el que contiene el panel donde se desarrolla el juego 
  */
 package pkgVista;
 
@@ -9,32 +7,35 @@ import Servidor.clsServidorMultiplicador;
 import java.awt.Color;
 import pkgImagenFondo.ImagenArriba;
 import pkgImagenFondo.ImagenIzq;
-import pkgModelo.clsEstadisticas;
+
 import pkgModelo.clsJugador;
 
 /**
  *
- * @author Ana
+ * @author Ana Paola Martinez y Carlos Garcia
  */
 public class frmTablero extends javax.swing.JFrame {
 
     /**
      * Creates new form frmTablero
      */
-    int [] cantFichas = new int[2];
+    int[] cantFichas = new int[2];
     int negras;
     int blancas;
     ImagenArriba f;
     ImagenIzq f1;
+frmRegistro r;
+  
     public frmTablero() {
         initComponents();
         this.getContentPane().setBackground(Color.BLUE);
         formWindowActivated(null);
+       
         //cantFichas=pnlTablero1.cantMov;
-       negras=cantFichas[0];
-       blancas=cantFichas[1];
+        negras = cantFichas[0];
+        blancas = cantFichas[1];
        //txtn.setText(String.valueOf(negras));
-       //txtb.setText(String.valueOf(blancas));
+        //txtb.setText(String.valueOf(blancas));
     }
 
     /**
@@ -48,7 +49,7 @@ public class frmTablero extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        jlnombre = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtEstadisticasT = new javax.swing.JTextArea();
@@ -57,7 +58,6 @@ public class frmTablero extends javax.swing.JFrame {
         pnlA = new javax.swing.JPanel();
         pnlI = new javax.swing.JPanel();
         pnlTablero1 = new pkgVista.pnlTablero();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jljugador = new javax.swing.JLabel();
@@ -69,8 +69,8 @@ public class frmTablero extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Jugador");
+        jlnombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jlnombre.setText("Jugador");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Jugador");
@@ -110,15 +110,15 @@ public class frmTablero extends javax.swing.JFrame {
             .addGap(0, 352, Short.MAX_VALUE)
         );
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Iniciar nueva Partida");
-        jButton1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-
         jButton2.setBackground(new java.awt.Color(204, 204, 204));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Ver Estadisticas");
         jButton2.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Computador");
@@ -146,16 +146,16 @@ public class frmTablero extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(32, 32, 32))
+                        .addComponent(jlnombre)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(143, 143, 143)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +177,7 @@ public class frmTablero extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jlnombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -186,10 +186,8 @@ public class frmTablero extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -203,25 +201,12 @@ public class frmTablero extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    clsEstadisticas es=new clsEstadisticas();
-    clsJugador jug;
-    public void recibirJugador(String nombre) {
-        System.out.println("recibeJugador");
-        String juga = es.cargarDatos(nombre);
-        if (!juga.equals("")) {
-            System.out.println("Nombre != Vacio");
-            txtEstadisticasJ.setText(juga);
-        } else {
-            System.out.println("Creando Jugador");
-            jug = new clsJugador(nombre);
-            es.guardarJugador(jug);
-//            es.guardarJugador("" + nombre + " 0 0 0");//EscribirLinea(""+nombre+" 0 0 0");
-            juga = es.cargarDatos(nombre);
-            txtEstadisticasJ.setText(juga);
-        }
-        txtEstadisticasT.setText(es.leerDatos());
-    }
-    
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+
     private void formWindowActivated(java.awt.event.WindowEvent evt) {
         f = new ImagenArriba();
         pnlA.add(f);
@@ -230,11 +215,12 @@ public class frmTablero extends javax.swing.JFrame {
         pnlI.add(f1);
         pnlI.repaint();
     }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-               
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -267,9 +253,7 @@ public class frmTablero extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -277,6 +261,7 @@ public class frmTablero extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel jljugador;
+    private javax.swing.JLabel jlnombre;
     private javax.swing.JLabel jlpc;
     private javax.swing.JPanel pnlA;
     private javax.swing.JPanel pnlI;

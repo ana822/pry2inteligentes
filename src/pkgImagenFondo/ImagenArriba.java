@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * En esta clase se le pone la imagen al panel superior del tablero donde van las letras
  */
 package pkgImagenFondo;
 
@@ -13,7 +11,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Ana
+ * @author Ana Paola Martinez y Carlos Garcia
  */
 public class ImagenArriba extends JPanel{
    public ImagenArriba(){    

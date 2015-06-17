@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Servidor;
 
 import pkgModelo.clsTablero;
@@ -19,7 +15,7 @@ import pkgModelo.clsJugador;
 
 /**
  *
- * @author Ana
+ * @author Ana Paola MArtinez y Carlos Garcia
  */
 public class clsServidorMultiplicador implements Runnable {
 
@@ -30,15 +26,15 @@ public class clsServidorMultiplicador implements Runnable {
     clsTablero juego;
     clsJugador jugador;
 
-    //quien me va a recibir el socket,
+    
     /**
-     *
+     *Me genera el canal de conexion
      */
     private void AtenderConexion() {
-        //genero el servidor
+        
         try {
             ss = new ServerSocket(1399);
-            s = ss.accept(); //se genera el canal de comunicacion
+            s = ss.accept(); 
             oos = new ObjectOutputStream(s.getOutputStream());
             ois = new ObjectInputStream(s.getInputStream());
 
@@ -47,7 +43,9 @@ public class clsServidorMultiplicador implements Runnable {
         }
 
     }
-
+/**
+ * El servidor realiza su jugada a partir del min-max
+ */
     @Override
     public void run() {
         AtenderConexion();
@@ -78,17 +76,25 @@ public class clsServidorMultiplicador implements Runnable {
     }
 
     /**
-     * metodo que recibe una matriz y la multiplica
-     *
-     * @return la nueva matriz multiplicada
+     * Este método me genera la jugada que se eligió en el min-max y me retorna el tablero con la jugada
+     * @param Juego
+     * @param m
+     * @return 
      */
     private String[][] Generarjugada(clsTablero Juego, Movement m) {
         juego.ponerFicha(new Point(m.getPositionX(), m.getPositionY()), "blanca");
-        System.out.println("FUNCIONA!!!!!!!" + juego.getTablero()[0][0]);
-        return juego.getTablero();
+             return juego.getTablero();
     }
 
-    // Poda Alfa-Beta con profundidad 
+   /**
+    * Algoritmo de min-max con poda alpha-beta, el cual me elige la mejor jugada 
+    * @param board
+    * @param player
+    * @param depth
+    * @param alpha
+    * @param beta
+    * @return 
+    */
     private Movement MiniMaxAlphaBetaDepth(clsTablero board, int player, int depth, int alpha, int beta) {
         if (board.GameEnded() || depth == 1) {
             Movement mov = new Movement();
@@ -124,7 +130,11 @@ public class clsServidorMultiplicador implements Runnable {
             return best;
         }
     }
-
+/**
+ * Este método es el punto clave del algoritmo min.max, me elige por donde debe seguir en su busqueda
+ * @param t
+ * @return 
+ */
     public int Utilidad(String[][] t) {
         int winner = 0;
         winner = juego.terminado(t);

@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Fichas que podran ir en el tablero, las cuales son blancas o negras y las vacias simulan las casillas que no tienen ficha
  */
 package pkgModelo;
 
@@ -9,7 +7,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Ana
+ * @author Ana Paola Martínez y Carlos Garcia
  */
 public class clsFicha implements Serializable{
 

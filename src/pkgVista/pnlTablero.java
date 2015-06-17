@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * En este panel se lleva a cabo todo el juego de othello 
  */
 package pkgVista;
 
@@ -18,13 +16,13 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import pkgModelo.clsEstadisticas;
+
 import pkgModelo.clsJugador;
 import pkgModelo.clsTablero;
 
 /**
  *
- * @author Ana
+ * @author Ana Paola Martinez y Carlos Garcia
  */
 public class pnlTablero extends javax.swing.JPanel implements ActionListener {
 
@@ -45,6 +43,7 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
     public pnlTablero() {
 
         initComponents();
+
         cantMov = new int[2];
         turno = 1;
         tablero = new clsTablero();
@@ -84,7 +83,7 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
             JOptionPane.showMessageDialog(this, "SERVIDOR NO DISPONIBLE");
             //Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+//frmTablero juego = new frmTablero();
     }
 
     /**
@@ -111,6 +110,10 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+   /**
+    * En este método se hace graficamente todos los movimientos y actualiza el tablero lógico 
+    * @param e 
+    */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -120,39 +123,23 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
         String ficha = "i" + i + j;
         if (ficha.equals(e.getActionCommand())) {
             if (turno == 1) {
-
                 if (tablero.puedoMover(new Point(i, j))) {
                     quitarPosibles();
                     fichas[i][j].setIcon(imgnegra);
-
                     tablero.ponerFicha(new Point(i, j), "negra");
-                    //quitarPosibles();
-
                     pintarEntrePuntos(tablero.validarMedios(new Point(i, j), "negra"));
-//                    pintarPosibles(tablero.validarMovimientos("blanca"));
-                    //cantMov = jugador.CantidadFichas(tablero.getTablero());
-
                     turno = 2;
-
                     System.out.println("estasss sooooon " + tablero.getTablero()[i][j]);
                     try {
-                        //tablero.mostrar();
-
                         tablero = jugador.EnviarJuagada(tablero.getTablero());
-//                        tablero.setTablero(jugadas);
-//                        System.out.println("RECIBIDO DE SERVIDOR");
-//                        tablero.mostrar();
+
                     } catch (IOException ex) {
                         Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(pnlTablero.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     quitarPosibles();
-                    System.out.println("x,y");
-                    System.out.println(tablero.getX() + "," + tablero.getY());
-
                     fichas[tablero.getX()][tablero.getY()].setIcon(imgblanca);
-
                     pintarEntrePuntos(tablero.validarMedios(new Point(tablero.getX(), tablero.getY()), "blanca"));
                     pintarPosibles(tablero.validarMovimientos("negra"));
                     turno = 1;
@@ -164,7 +151,10 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
 
         }
     }
-
+/**
+ * Pinta los posibles movimientos que tiene el jugador en el trablero de juego
+ * @param mov 
+ */
     public void pintarPosibles(LinkedList<Point> mov) {
         for (int i = 0; i < mov.size(); i++) {
             if (turno == 1) {
@@ -174,7 +164,10 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
             }
         }
     }
-
+/**
+ * Le entra por parametro una lista de puntos del jugador contrario, los cuales los va a pintar del color de la ficha del jugador actual
+ * @param f 
+ */
     public void pintarEntrePuntos(LinkedList<Point> f) {
         for (int i = 0; i < f.size(); i++) {
             if (turno == 1) {
@@ -187,7 +180,9 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
         }
     }
 
-    //Quitar posibles movimientos del contrincante   
+ /**
+  * Me quita los posibles movimientos del jugador contrario
+  */   
     public void quitarPosibles() {
         for (int k = 0; k < fichas.length; k++) {
             for (int l = 0; l < fichas.length; l++) {
@@ -202,7 +197,10 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
 
         }
     }
-
+/**
+ * Compara la cantidad de fichas entre el jugador y la máquina y muestra si el jugador ganó, perdió o empató
+ * @param tab 
+ */
     public void ganador(String[][] tab) {
         int[] mov;
 
@@ -218,20 +216,4 @@ public class pnlTablero extends javax.swing.JPanel implements ActionListener {
             JOptionPane.showMessageDialog(this, "Empate!!");
         }
     }
-    clsEstadisticas es = new clsEstadisticas();
-    clsJugador jug;
-
-//    public void recibirJugador(String nombre) {
-//        String juga = es.cargarDatos(nombre);
-//        if (!juga.equals("")) {
-//            txtEstadisticasJ.setText(juga);
-//        } else {
-//            jug = new clsJugador(nombre);
-//            es.guardarJugador(jug);
-//            es.guardarJugador("" + nombre + " 0 0 0");//EscribirLinea(""+nombre+" 0 0 0");
-//            juga = es.cargarDatos(nombre);
-//            txtEstadisticasJ.setText(juga);
-//        }
-//        txtEstadisticasT.setText(es.leerDatos());
-//    }
 }
