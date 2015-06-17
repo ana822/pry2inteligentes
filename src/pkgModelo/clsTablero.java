@@ -67,7 +67,7 @@ public class clsTablero implements Serializable {
     }
 
     /**
-     * Pone una ficha en le tablero
+     * Pone una ficha en el tablero
      *
      * @param pos
      * @param ficha
@@ -147,28 +147,28 @@ public class clsTablero implements Serializable {
                         mov.add(p);
                     }
                 }
-//arriba-izquierda
+                //arriba-izquierda
                 if ((i - 1) > 0 && (j - 1) > 0 && tablero[i][j].equals(ficha) && tablero[i - 1][j - 1].equals(fichaContraria(ficha))) {
                     p = movReversi(new Point(i, j), ficha, 4);
                     if (p.getX() != -100 && p.getY() != -100) {
                         mov.add(p);
                     }
                 }
-//abajo-izquierda
+                 //abajo-izquierda
                 if ((i + 1) < 7 && (j - 1) > 0 && tablero[i][j].equals(ficha) && tablero[i + 1][j - 1].equals(fichaContraria(ficha))) {
                     p = movReversi(new Point(i, j), ficha, 5);
                     if (p.getX() != -100 && p.getY() != -100) {
                         mov.add(p);
                     }
                 }
-//arriba-derecha
+                //arriba-derecha
                 if ((i - 1) > 0 && (j + 1) < 7 && tablero[i][j].equals(ficha) && tablero[i - 1][j + 1].equals(fichaContraria(ficha))) {
                     p = movReversi(new Point(i, j), ficha, 6);
                     if (p.getX() != -100 && p.getY() != -100) {
                         mov.add(p);
                     }
                 }
-//abajo-derecha  
+                //abajo-derecha  
                 if ((i + 1) < 7 && (j + 1) < 7 && tablero[i][j].equals(ficha) && tablero[i + 1][j + 1].equals(fichaContraria(ficha))) {
                     p = movReversi(new Point(i, j), ficha, 7);
                     if (p.getX() != -100 && p.getY() != -100) {

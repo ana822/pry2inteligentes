@@ -101,7 +101,6 @@ public class clsServidorMultiplicador implements Runnable {
                 clsTablero successorBoard = (clsTablero) board.Clone();
                 successorBoard.ponerFicha(new Point((int) successors.get(i).getX(), (int) successors.get(i).getY()), "blanca");
                 Movement tmp = MiniMaxAlphaBetaDepth(successorBoard, player, depth + 1, alpha, beta);
-
                 if (best == null || (player == -1 && tmp.Value < best.Value) || (player == 1 && tmp.Value > best.Value)) {
                     tmp.setPositionX(poX);
                     tmp.setPositionY(poY);
@@ -109,8 +108,7 @@ public class clsServidorMultiplicador implements Runnable {
                 }
                 if (player == -1 && best.Value < beta) {
                     beta = best.Value;
-                    //System.out.println(" "+board.Winner()+" prof: "+depth+" beta: "+beta);
-                }
+                      }
                 if (player == 1 && best.Value > alpha) {
                     alpha = best.Value;
                 }
